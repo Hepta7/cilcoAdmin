@@ -1,0 +1,94 @@
+.myTable {
+    width: 100%;
+  
+    .myTableContent {
+      background: #ffffff;
+      width     : 100%;
+      padding   : 40px 30px 0 30px;
+    }
+  
+    .defaultRowStyl {
+  
+      background: #ffffff !important;
+  
+      :global {
+  
+        .ant-table-cell-fix-left,
+        .ant-table-cell-fix-right {
+          background-color: #ffffff !important;
+        }
+  
+        .ant-table-tbody>tr.ant-table-row-selected>td {
+          background-color: #ffffff !important;
+        }
+  
+      }
+  
+    }
+  
+    .evenRowStyl {
+      background: #e5eefd !important;
+  
+      :global {
+  
+        .ant-table-cell-fix-left,
+        .ant-table-cell-fix-right {
+          background-color: #e5eefd !important;
+        }
+  
+        .ant-table-tbody>tr.ant-table-row-selected>td {
+          background-color: #e5eefd !important;
+        }
+  
+      }
+    }
+  
+    .exceptionRowStyl {
+      background: #fde6e9 !important;
+  
+      :global {
+  
+        .ant-table-cell-fix-left,
+        .ant-table-cell-fix-right {
+          background-color: #fde6e9 !important;
+        }
+  
+        .ant-table-tbody>tr.ant-table-row-selected>td {
+          background-color: #fde6e9 !important;
+        }
+      }
+    }
+  
+  
+  
+    :global {
+  
+  
+      .ant-table-tbody>tr.ant-table-row-selected>td {
+        background: none;
+      }
+  
+      .ant-table-thead>tr>th {
+        // background: #e5eefd;
+        background: #72cb3c;
+        color: #fff;
+      }
+  
+      .table tr th.ant-table-selection-column,
+      table tr td.ant-table-selection-column {
+        width: 58px;
+      }
+  
+  
+    }
+  
+    .pagination {
+      height         : 50px;
+      margin-bottom  : 9px;
+      display        : flex;
+      flex-direction : row;
+      flex-wrap      : nowrap;
+      justify-content: flex-end;
+      align-items    : center;
+    }
+  }

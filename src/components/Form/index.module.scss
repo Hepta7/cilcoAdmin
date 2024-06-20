@@ -1,0 +1,230 @@
+.myform {
+
+    // 默认
+    :global {
+
+        // Form.Item
+        .ant-form-item {
+            .ant-form-item-control {
+                flex: none;
+                flex-grow: none;
+            }
+
+            .ant-form-item-control-input-content {
+
+                .ant-input,
+                .ant-select-selector,
+                .ant-picker {
+                    width: 280px;
+                    min-height: 37px;
+                    border-radius: 4px;
+                }
+            }
+
+            .ant-form-item-label {
+                min-width: 70px;
+                line-height: 37px;
+            }
+
+
+            // select disabled backgrouond 
+            .ant-select-disabled.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+                background-color: rgba(237, 242, 249, 1);
+            }
+
+            // 禁用状态的样式  日期选择 
+            .ant-input[disabled],
+            .ant-picker-disabled {
+                background-color: rgba(237, 242, 249, 1);
+            }
+
+
+            // 单选框
+            .ant-radio-group {
+                display: flex;
+                align-items: center;
+                height: 37px;
+
+                .ant-radio-wrapper {
+                    margin-right: 58px;
+
+                    & span:nth-child(2) {
+                        flex-shrink: 0;
+                        color: rgba(0, 0, 0, 0.85);
+                    }
+                }
+
+                & .ant-radio-wrapper:last-child {
+                    margin-right: 0;
+                }
+            }
+
+
+
+            // 去除input number箭头
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+            }
+
+            input[type='number'] {
+                -moz-appearance: textfield;
+            }
+
+
+        }
+
+        .ant-select-single .ant-select-selector .ant-select-selection-item,
+        .ant-select-single .ant-select-selector .ant-select-selection-placeholder {
+            line-height: 37px;
+            text-align: left;
+        }
+
+    }
+
+    // 纵向
+    .formContColumn {
+
+        // padding: 0 24px;
+        :global {
+            .ant-form-item-label label::after {
+                display: none;
+            }
+
+            .ant-form-item-label {
+                margin-right: 10px;
+            }
+        }
+    }
+
+    // 横向
+    .formContRow {
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+
+        :global {
+            .ant-form-item {
+                margin: 0 20px 30px 0;
+
+                // input框的默认宽高
+                .ant-input,
+                // .ant-select,
+                .ant-select-selector,
+                .ant-picker {
+                    width: 250px;
+                }
+            }
+        }
+    }
+
+
+}
+
+// 纵向底部按钮  纵向时样式
+.bottomCloumn {
+    width: calc(100% + 48px);
+    position: relative;
+    left: -24px;
+    z-index: 1;
+
+    div {
+        padding-top: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        border-top: 1px solid rgba(217, 222, 229, 1);
+
+
+
+        button {
+            margin-left: 20px;
+            text-align: center;
+            width: 76px;
+            height: 37px;
+            border: 1px solid rgba(145, 150, 157, 1);
+            border-radius: 4px;
+        }
+
+        & button:nth-child(1) {
+            margin-left: 0;
+        }
+
+        & button:nth-child(2) {
+            margin-right: 30px;
+        }
+
+    }
+
+}
+
+
+// 纵向底部按钮 横向排列时的样式
+.bottomRow {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+
+    div {
+        display: flex;
+        flex-wrap: nowrap;
+
+        & button:nth-child(1) {
+            margin-left: 0;
+            color: rgba(97, 102, 109, 1);
+            font-size: 14px;
+        }
+
+        button {
+            border: 1px solid rgba(145, 150, 157, 1);
+            border-radius: 4px;
+            width: 76px;
+            height: 37px;
+            margin-left: 30px;
+
+        }
+
+        button[type="submit"] {
+            background: rgba(0, 92.00000000000003, 242, 1);
+        }
+    }
+
+}
+
+
+// case "text":
+.visualText {
+    width: 100%;
+    height: 37px;
+    background: rgba(237, 242, 249, 1);
+    border-radius: 4px;
+    padding: 8px 12px;
+}
+
+.visualTextAreaRead {
+    width: 100%;
+    min-height: 100px;
+    background: rgba(237, 242, 249, 1);
+    border-radius: 4px;
+    padding: 8px 12px;
+}
+
+.myFormBottomClass {
+    position: absolute;
+    top: 632px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 85px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #fff;
+    padding: 0 20px;
+    border-top: 1px solid #d9dee5;
+
+    button {
+        margin-left: 20px;
+    }
+}

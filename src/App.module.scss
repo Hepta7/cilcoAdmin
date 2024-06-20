@@ -1,0 +1,232 @@
+// 顶部导航
+.header {
+  // display: flex;
+  // align-items: center;
+  padding: 0 30px;
+  margin: 0;
+  background: rgb(84, 219, 0);
+  // background: #663399;
+
+  // 标题
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    img {
+      height: 63.99px;
+      // width: px;
+    }
+
+    h1 {
+      margin-left: 20px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 32px;
+      margin: 0;
+    }
+  }
+
+  .parkSelect {
+    margin-left: 30px;
+  }
+
+  // 操作
+  .operation {
+    flex: 1;
+    text-align: right;
+    margin-right: 40px;
+    font-size: 16px;
+  }
+}
+
+// 面包屑
+.breadcrumb {
+  display: flex;
+  align-items: center;
+
+  .breadcrumbHead {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(145, 150, 157, 1);
+  }
+
+}
+
+// 左侧内容
+.content {
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* 整个滚动条 */
+  &::-webkit-scrollbar {
+    width: 10px;
+    background: rgba(0, 0, 0, 0);
+  }
+
+  /* 滚动条上的箭头按钮 */
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  /* 滚动条上的滚动滑块 */
+  &::-webkit-scrollbar-thumb {
+    background-color: #C1C5CC;
+    border-radius: 20px;
+  }
+}
+
+
+// 禁用body滚动条
+body::-webkit-scrollbar {
+  display: none
+}
+
+// 出现动画
+.pageAppear {
+  position: relative;
+  left: 0px;
+  -webkit-animation: appear 1 .3s;
+  animation: appear 1 .4s;
+}
+
+// 消失动画
+.pageDisAppear {
+  position: relative;
+  left: 0px;
+  -webkit-animation: disAppear 1 .3s;
+  animation: disAppear 1 .4s;
+}
+
+
+@-webkit-keyframes appear {
+  0% {
+    left: 0px;
+    opacity: 1;
+
+  }
+
+  100% {
+    left: 50px;
+    opacity: 0;
+  }
+}
+
+
+@keyframes appear {
+  0% {
+    left: 0px;
+    opacity: 1;
+
+  }
+
+  100% {
+    left: 50px;
+    opacity: 0;
+
+  }
+}
+
+@-webkit-keyframes disAppear {
+  0% {
+    left: -50px;
+    opacity: 0;
+
+  }
+
+  100% {
+    left: 0px;
+    opacity: 1;
+  }
+
+}
+
+@keyframes disAppear {
+  0% {
+    left: -50px;
+    opacity: 0;
+
+  }
+
+  100% {
+    left: 0px;
+    opacity: 1;
+  }
+
+}
+
+// form表单样式
+.formDataMoadl {
+  :global {
+    .ant-form-item-label {
+      width: 170px;
+    }
+
+  }
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+// 操作
+.operation {
+
+  cursor: pointer;
+
+  li {}
+
+  // :global {
+  //   .ant-popover-message-title {
+  //     white-space: nowrap;
+  //     transition : none;
+  //   }
+  // }
+
+}
+
+.materialMoadl {
+
+  // height: 500px !important;
+
+  :global {
+    .ant-modal-body {
+      height: 600px;
+    }
+
+    .ant-modal {
+      width: 900px !important;
+    }
+
+    .ant-table-tbody td {
+      padding: 11px 16px !important;
+    }
+
+  }
+
+  .material {
+    .title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 0 20px 0;
+
+      h3 {
+        margin: 0;
+      }
+    }
+  }
+
+  h3 {
+    text-align: center;
+    font-size: 22px;
+  }
+
+  .loading {
+    height: 470px; // width: 36vw;
+    margin: 0 auto;
+  }
+}
