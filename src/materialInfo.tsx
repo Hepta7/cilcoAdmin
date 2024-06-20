@@ -3,7 +3,6 @@ import MyTable from "./components/table";
 import { useSetState } from "ahooks";
 import HeadTitle from "./components/headTitle";
 
-
 const columns = [
   {
     title: "名称",
@@ -17,11 +16,7 @@ const columns = [
     align: "center",
     // onCell: () => ellipsis(120),
   },
-  {
-    title: "添加范围",
-    dataIndex: "range",
-    align: "center",
-  },
+
   {
     title: "密度",
     dataIndex: "density",
@@ -60,15 +55,15 @@ function generateMaterialData() {
     let range, type;
     if (i < 3) {
       // A到C
-      range = "0-100%";
+
       type = "主料";
     } else if (i >= 3 && i < 8) {
       // D到H
-      range = "0-50%";
+
       type = "辅料";
     } else {
       // I到J
-      range = "0-80%";
+
       type = "填料";
     }
 
@@ -82,7 +77,7 @@ function generateMaterialData() {
       id: i,
       name,
       type,
-      range,
+
       density,
       viscosity,
       temperature,

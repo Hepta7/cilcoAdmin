@@ -15,7 +15,6 @@ let formList = [
   {
     key: "name",
     type: "input",
-    inputType: "number",
     isRequired: true,
     title: "产品名称",
     placeholder: "请输入",
@@ -83,13 +82,18 @@ export default function Performance() {
   const [progress, setProgress] = useState(0);
   const timer = useRef(null) as any;
   const [title, setTitle] = useState("");
+  const [delModal, setDelModal] = useState(false);
+  const [itemIdx, setItemIdx] = useState(null) as any;
+
   const [formData, setFormData] = useSetState({
     // 新增 编辑 form表单值
     clickItem: {} as any,
     flag: false,
     operation: "add",
   });
+
   const [hint, setHint] = useState(false);
+
   const useForm = useRef() as any; // 存储头部form表单的实例
 
   const [tableData, setTableData] = useSetState({
@@ -182,18 +186,36 @@ export default function Performance() {
       title: "操作",
       dataIndex: "operation",
       align: "center",
-      width: 105,
+      width: 180,
       fixed: "right",
-      render: (text: any, record: any) => (
+      render: (text: any, record: any, index: number) => (
         <div
-          className={styles.operation}
-          style={{ color: "#005CF2FF" }}
-          onClick={() => {
-            setHint(true);
-            setTitle(record.name);
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          输出配比
+          <div
+            className={styles.operation}
+            style={{ color: "#005CF2FF" }}
+            onClick={() => {
+              setHint(true);
+              setTitle(record.name);
+            }}
+          >
+            输出配比
+          </div>
+          <div
+            style={{ color: "red", marginLeft: 15, cursor: "pointer" }}
+            onClick={() => {
+              console.log("index", index);
+              setItemIdx(index);
+              setDelModal(true);
+            }}
+          >
+            删除
+          </div>
         </div>
       ),
     },
@@ -354,7 +376,12 @@ export default function Performance() {
   const onFinishFailed = (errorInfo: any, type: string) => {
     console.log("Failed:", errorInfo);
   };
-
+  const delItem = () => {
+    let list = tableData.list.slice();
+    list.splice(itemIdx, 1);
+    setTableData({ list });
+    setDelModal(false);
+  };
   return (
     <div id={styles.Performance}>
       <HeadTitle
@@ -450,9 +477,18 @@ export default function Performance() {
         onCancel={() => setHint(false)}
         okText="确认"
         cancelText="取消"
-        
       >
         <div>计算配比需要消耗1-2分钟，期间不能推出</div>
+      </Modal>
+      <Modal
+        title="提示"
+        open={delModal}
+        onOk={delItem}
+        onCancel={() => setDelModal(false)}
+        okText="确认"
+        cancelText="取消"
+      >
+        <div>你确定删除这条数据吗</div>
       </Modal>
 
       <MyTable
