@@ -22,15 +22,15 @@ function Routes() {
       element: <Home/> ,
       children: [
         {
-          path: '/materialInfo',// 场地管理
+          path: '/materialInfo',//  
           element: <MaterialInfo />,
         },
         {
-          path: '/performance', // 区域管理
+          path: '/performance', //  
           element: <Performance />,
         },
         {
-          path: '/material', // 区域管理
+          path: '/material', //  
           element: <Material />,
         },
       ]
