@@ -67,3 +67,6 @@ export function zeroize(time: any) {
 export function getImageUrl(url: string): string {
   return new URL(url, import.meta.url).href;
 }
+export function random(min: any, max: any) {
+  return Math.random() * (max - min) + min;
+}

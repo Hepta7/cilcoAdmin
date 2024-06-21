@@ -160,8 +160,11 @@ body::-webkit-scrollbar {
 // form表单样式
 .formDataMoadl {
   :global {
+    .ant-modal{
+      width: 540px !important;
+    }
     .ant-form-item-label {
-      width: 170px;
+      width: 200px;
     }
 
   }
