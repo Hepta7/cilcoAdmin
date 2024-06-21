@@ -471,7 +471,7 @@ export default function Performance() {
       </Modal>
 
       <Modal
-        title="Modal"
+        title="提示"
         open={hint}
         onOk={openModal}
         onCancel={() => setHint(false)}
