@@ -478,7 +478,7 @@ export default function Performance() {
         okText="确认"
         cancelText="取消"
       >
-        <div>计算配比需要消耗1-2分钟，期间不能推出</div>
+        <div>计算配比需要消耗1-2分钟，期间不能退出</div>
       </Modal>
       <Modal
         title="提示"
@@ -488,7 +488,7 @@ export default function Performance() {
         okText="确认"
         cancelText="取消"
       >
-        <div>你确定删除这条数据吗</div>
+        <div>你确定要删除这条数据吗</div>
       </Modal>
 
       <MyTable
