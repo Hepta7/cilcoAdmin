@@ -70,3 +70,28 @@ export function getImageUrl(url: string): string {
 export function random(min: any, max: any) {
   return Math.random() * (max - min) + min;
 }
+
+export function jsonToUrlParam(json: any) {
+  return Object.keys(json)
+    .map((key) => key + "=" + json[key])
+    .join("&");
+}
+
+export function urlParamsToObject(url: any) {
+  //获取字符串 ? 后面的部分
+  const queryString = url.split("?")[1];
+  const paramsArr = queryString.split("&");
+  const paramObj = {} as any;
+
+  paramsArr.forEach((param: any) => {
+    const [key, value] = param.split("=");
+    paramObj[key] = decodeURIComponent(value);
+  });
+
+  return paramObj;
+}
+
+
+export const randomInt = (min: any, max: any) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};

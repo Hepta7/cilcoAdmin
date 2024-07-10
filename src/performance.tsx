@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
+import { randomInt } from "./utils";
 
 let formList = [
   {
@@ -71,9 +72,7 @@ let formList = [
 const EXCEL_TYPE =
   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
 
-const randomInt = (min: any, max: any) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
+
 
 export default function Performance() {
   // const navigate = useNavigate();

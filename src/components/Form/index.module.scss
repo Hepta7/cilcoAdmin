@@ -16,7 +16,7 @@
                 .ant-select-selector,
                 .ant-picker {
                     width: 280px;
-                    min-height: 37px;
+                    // min-height: 37px;
                     border-radius: 4px;
                 }
             }
@@ -24,6 +24,7 @@
             .ant-form-item-label {
                 min-width: 70px;
                 line-height: 37px;
+                 
             }
 
 
@@ -74,11 +75,11 @@
 
         }
 
-        .ant-select-single .ant-select-selector .ant-select-selection-item,
-        .ant-select-single .ant-select-selector .ant-select-selection-placeholder {
-            line-height: 37px;
-            text-align: left;
-        }
+        // .ant-select-single .ant-select-selector .ant-select-selection-item,
+        // .ant-select-single .ant-select-selector .ant-select-selection-placeholder {
+        //     line-height: 37px;
+        //     text-align: left;
+        // }
 
     }
 

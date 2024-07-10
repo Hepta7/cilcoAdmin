@@ -1,31 +1,31 @@
-import { type } from "os";
-import React, { useState, useEffect, Children, useRef } from "react";
+import { useState, useEffect, Children, useRef } from "react";
 import {
-  BrowserRouter, //创建路由所有的路由操作都得包含在BrowserRouter组件里面
-  Routes, //所有对应路由需要展示的组件都得包含在Routes组件
-  Route, //配置对应路由地址显示的组件
-  Link, //跳转路由的组件 to属性 设置跳转的地址
+  // BrowserRouter, //创建路由所有的路由操作都得包含在BrowserRouter组件里面
+  // Routes, //所有对应路由需要展示的组件都得包含在Routes组件
+  // Route, //配置对应路由地址显示的组件
+  // Link, //跳转路由的组件 to属性 设置跳转的地址
   useNavigate, //跳转路由的Api方法
-  useParams, //获取动态路由后面的参数
-  useSearchParams, //获取url地址后面的参数
+  // useParams, //获取动态路由后面的参数
+  // useSearchParams, //获取url地址后面的参数
   Outlet, //嵌套路由子路由的出口
-  Navigate,
-  useRoutes,
+  // Navigate,
+  // useRoutes,
   useLocation, // 路由信息
 } from "react-router-dom";
 import { Breadcrumb, Dropdown, Layout, Menu, Space, Select } from "antd";
-import {
-  DownOutlined,
-  LogoutOutlined,
-  createFromIconfontCN,
-} from "@ant-design/icons";
+// import {
+//   DownOutlined,
+//   LogoutOutlined,
+//   createFromIconfontCN,
+// } from "@ant-design/icons";
 import styles from "./App.module.scss";
 // import Logo from "../../static/icon/logo.png"
-import { useMount, useSetState } from "ahooks";
+// import { useMount, useSetState } from "ahooks";
 // import { outLogin, placeList } from "./api";
-import { getLoalStorage, setLoalStorage } from "./utils/index";
+// import { getLoalStorage, setLoalStorage } from "./utils/index";
 import logo1 from "./static/logo2.jpg";
 import icon1 from "./static/icon1.png";
+import icon2 from "./static/icon2.png";
 import icon from "./static/icon.png";
 
 const { Option } = Select;
@@ -42,15 +42,16 @@ function getItem(label: any, key: any, icon?: any, children?: any) {
   };
 }
 
-// 自定义icon
-const IconFont = createFromIconfontCN({
-  scriptUrl: ["//at.alicdn.com/t/c/font_3573489_gw6pz65pxyw.js"],
-});
+// // 自定义icon
+// const IconFont = createFromIconfontCN({
+//   scriptUrl: ["//at.alicdn.com/t/c/font_3573489_gw6pz65pxyw.js"],
+// });
 
 // side 侧边栏 配置
 const items = [
   getItem("原材料信息", "/materialInfo", <img src={icon1} width={25}/>),
   getItem("产品性能", "/performance", <img src={icon} width={25} />),
+  getItem("工艺参数", "/processParams", <img src={icon2} width={25} />),
   //   getItem('输出配比', '/area', <IconFont style={{ fontSize: 18 }} type="icon-quyuguanli" />),
   //   getItem('泊位管理', '/berthage', <IconFont style={{ fontSize: 18 }} type="icon-boweibangding" />),
   //   getItem('车辆登记', '/register', <IconFont style={{ fontSize: 18 }} type="icon-qiche" />),
@@ -81,15 +82,15 @@ const items = [
 // }
 
 // 头部右侧 设置
-const menu = (
-  <Menu
-    items={
-      [
-        //   getItem(() => <span onClick={exitLogin}>退出登录</span>, '0', <LogoutOutlined rotate={-90} />),
-      ]
-    }
-  />
-);
+// const menu = (
+//   <Menu
+//     items={
+//       [
+//         //   getItem(() => <span onClick={exitLogin}>退出登录</span>, '0', <LogoutOutlined rotate={-90} />),
+//       ]
+//     }
+//   />
+// );
 
 // 路径匹配面包屑
 // const routerBreadcrumb = {
@@ -171,7 +172,7 @@ function Home() {
   }
 
   return (
-    <div>
+    <div id={styles.home}>
       <Layout style={{ minHeight: "100vh" }}>
         <Header
           className={styles.header}
