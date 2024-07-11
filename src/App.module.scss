@@ -240,6 +240,7 @@ ol {
 }
 
 #processParams {
+
   .content {
     display: flex;
     flex-direction: column;
@@ -254,6 +255,20 @@ ol {
 }
 
 #processView {
+  animation: paramsShow .7s forwards;
+
+  @keyframes paramsShow {
+    0% {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+
+    100% {
+      transform: translateX(0px);
+      opacity: 1;
+    }
+  }
+
   .content {
     width: 1739px;
     margin: 0 auto;

@@ -215,7 +215,10 @@ export default function ProcessParams() {
 
     if (valarr.length == Object.keys(obj).length) {
       setModalShow(true);
-      clacTime(randomInt(40, 60));
+      
+      setTimeout(() => {
+        clacTime(randomInt(40, 60));
+      }, randomInt(800, 1500));
     }
 
     // navigate("/processView?" + str); // 路由跳转
@@ -251,7 +254,7 @@ export default function ProcessParams() {
   };
 
   return (
-    <div id={styles.processParams}>
+    <div id={styles.processView}>
       <HeadTitle title="设置螺杆组合参数" />
 
       <div className={styles.content}>
@@ -323,32 +326,32 @@ export default function ProcessParams() {
           <div className={styles.info}>
             <div className={styles.item + " " + styles.name}>
               <div className={styles.label}>产品名称</div>
-              <span>产品1</span>
+              <span>产品{randomInt(1, 10)}</span>
             </div>
             <div className={styles.list}>
               <div className={styles.item}>
                 <div className={styles.label}>密度</div>
-                <span>1.0g/cm³</span>
+                <span>{randomInt(1, 5)}g/cm³</span>
               </div>
               <div className={styles.item}>
                 <div className={styles.label}>粘度</div>
-                <span>0.57 Pa·s</span>
+                <span>{randomInt(0.3, 1)} Pa·s</span>
               </div>
               <div className={styles.item}>
                 <div className={styles.label}>玻璃化转变温度</div>
-                <span>29°C</span>
+                <span>{randomInt(10, 40)}°C</span>
               </div>
               <div className={styles.item}>
                 <div className={styles.label}>熔体质量流动速率</div>
-                <span>0.6 m/s</span>
+                <span>{randomInt(0, 1.5)} m/s</span>
               </div>
               <div className={styles.item}>
                 <div className={styles.label}>弯曲强度</div>
-                <span>325 MPa</span>
+                <span>{randomInt(100, 500)} MPa</span>
               </div>
               <div className={styles.item}>
                 <div className={styles.label}>拉伸强度</div>
-                <span>468 MPa</span>
+                <span>{randomInt(100, 500)} MPa</span>
               </div>
             </div>
           </div>
