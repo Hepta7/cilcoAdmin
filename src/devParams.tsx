@@ -1,90 +1,69 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import MyForm from "./components/Form/index";
 import HeadTitle from "./components/headTitle";
-import { Button, Modal } from "antd";
+import { Button, message, Modal } from "antd";
 import styles from "./App.module.scss";
-import { useNavigate } from "react-router-dom";
-import { jsonToUrlParam, randomInt } from "./utils";
-import Process from "./static/process.png";
+import { randomInt } from "./utils";
+import Device from "./static/device.png";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-
-const selectList = [
-  {
-    name: "22/22",
-    id: 1,
-  },
-  {
-    name: "32/32",
-    id: 2,
-  },
-  {
-    name: "48/48",
-    id: 3,
-  },
-  {
-    name: "64/32",
-    id: 4,
-  },
-  {
-    name: "32/32A",
-    id: 5,
-  },
-  {
-    name: "SK64/32N",
-    id: 6,
-  },
-];
 
 let formList = [
   {
     key: "meshingBlock1",
-    type: "select",
-    isRequired: true,
-    title: "啮合块1",
-    placeholder: "请选择啮合块型号",
-    selectList,
+    type: "input",
+    title: "1号桶（%）",
+    placeholder: "请输入调整参数",
   },
   {
     key: "meshingBlock2",
-    type: "select",
-    isRequired: true,
-    title: "啮合块2",
-    placeholder: "请选择啮合块型号",
-    selectList,
+    type: "input",
+    title: "2号桶（%）",
+    placeholder: "请输入调整参数",
   },
   {
     key: "meshingBlock3",
-    type: "select",
-    isRequired: true,
-    title: "啮合块3",
-    placeholder: "请选择啮合块型号",
-    selectList,
+    type: "input",
+    title: "3号桶（%）",
+    placeholder: "请输入调整参数",
   },
   {
     key: "meshingBlock4",
-    type: "select",
-    isRequired: true,
-    title: "啮合块4",
-    placeholder: "请选择啮合块型号",
-    selectList,
+    type: "input",
+    title: "4号桶（%）",
+    placeholder: "请输入调整参数",
   },
   {
     key: "meshingBlock5",
-    type: "select",
-    isRequired: true,
-    title: "啮合块5",
-    placeholder: "请选择啮合块型号",
-    selectList,
+    type: "input",
+    title: "5号桶（%）",
+    placeholder: "请输入调整参数",
+  },
+  {
+    key: "meshingBlock6",
+    type: "input",
+    title: "6号桶（%）",
+    placeholder: "请输入调整参数",
+  },
+  {
+    key: "meshingBlock7",
+    type: "input",
+    title: "7号桶（%）",
+    placeholder: "请输入调整参数",
+  },
+  {
+    key: "meshingBlock8",
+    type: "input",
+    title: "8号桶（%）",
+    placeholder: "请输入调整参数",
   },
 ];
 
 export default function ProcessParams() {
   const useForm = useRef() as any; // 存储头部form表单的实例
-  const timer = useRef(null) as any;
-  const [loadChange, setLoadChange] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [modalShow, setModalShow] = useState(false);
-
+  //   const timer = useRef(null) as any;
+  //   const [loadChange, setLoadChange] = useState(false);
+  //   const [progress, setProgress] = useState(0);
+  //   const [modalShow, setModalShow] = useState(false);
   const onFinish = (values: any, type: string) => {
     console.log("type", type);
   };
@@ -100,15 +79,13 @@ export default function ProcessParams() {
 
     let valarr = Object.values(obj).filter((item) => item != undefined);
 
-    if (valarr.length == Object.keys(obj).length) {
-      setModalShow(true);
-      
-      setTimeout(() => {
-        clacTime(randomInt(40, 60));
-      }, randomInt(800, 1500));
+    if (valarr.length == 0) {
+      message.warning("请输入调整参数");
+    } else {
+      message.loading("请求发送中...", 2, () => {
+        message.success("参数发送成功");
+      });
     }
-
-    // navigate("/processView?" + str); // 路由跳转
   };
 
   const reset = () => {
@@ -116,36 +93,36 @@ export default function ProcessParams() {
     useForm.current.resetFields();
   };
 
-  const clacTime = (suspend?: any) => {
-    clearInterval(timer.current);
+  //   const clacTime = (suspend?: any) => {
+  //     clearInterval(timer.current);
 
-    timer.current = setInterval(() => {
-      setProgress((value) => {
-        if (value >= 100) {
-          clearInterval(timer.current);
-          setLoadChange(true);
-          return 100;
-        } else if (value >= suspend) {
-          clearInterval(timer.current);
+  //     timer.current = setInterval(() => {
+  //       setProgress((value) => {
+  //         if (value >= 100) {
+  //           clearInterval(timer.current);
+  //           setLoadChange(true);
+  //           return 100;
+  //         } else if (value >= suspend) {
+  //           clearInterval(timer.current);
 
-          setTimeout(() => {
-            clacTime();
-          }, randomInt(2000, 3000));
+  //           setTimeout(() => {
+  //             clacTime();
+  //           }, randomInt(2000, 3000));
 
-          return value;
-        }
+  //           return value;
+  //         }
 
-        return value + randomInt(1, 10);
-      });
-    }, 500);
-  };
+  //         return value + randomInt(1, 10);
+  //       });
+  //     }, 500);
+  //   };
 
   return (
-    <div id={styles.processView}>
-      <HeadTitle title="设置螺杆组合参数" />
+    <div id={styles.devParams}>
+      <HeadTitle title="调整设备参数" />
 
       <div className={styles.content}>
-        <img src={Process} style={{ marginBottom: 40 }} />
+        <img src={Device} style={{ marginBottom: 40 }} />
         <MyForm
           bottomIsShow={false}
           onFinish={(e: any) => onFinish(e, "search")}
@@ -172,7 +149,7 @@ export default function ProcessParams() {
         </div>
       </div>
 
-      <Modal
+      {/* <Modal
         title={loadChange ? "产品性能" : null}
         className={styles.loadingModal}
         centered
@@ -270,7 +247,7 @@ export default function ProcessParams() {
             </div>
           </div>
         )}
-      </Modal>
+      </Modal> */}
     </div>
   );
 }

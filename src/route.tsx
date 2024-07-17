@@ -6,6 +6,7 @@ import Performance from "./performance";
 import Material from "./material";
 import ProcessParams from "./processParams";
 import ProcessView from "./processView";
+import DevParams from "./devParams";
 
 function Routes() {
   // const [searchParams, setSearchParams] = useSearchParams();
@@ -42,6 +43,10 @@ function Routes() {
         {
           path: '/ProcessView', //  
           element: <ProcessView />,
+        },
+        {
+          path: '/DevParams', //  
+          element: <DevParams />,
         },
       ]
     },

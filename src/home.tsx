@@ -26,6 +26,7 @@ import styles from "./App.module.scss";
 import logo1 from "./static/logo2.jpg";
 import icon1 from "./static/icon1.png";
 import icon2 from "./static/icon2.png";
+import icon3 from "./static/icon3.png";
 import icon from "./static/icon.png";
 
 const { Option } = Select;
@@ -52,6 +53,7 @@ const items = [
   getItem("原材料信息", "/materialInfo", <img src={icon1} width={25}/>),
   getItem("产品性能", "/performance", <img src={icon} width={25} />),
   getItem("工艺参数", "/processParams", <img src={icon2} width={25} />),
+  getItem("设备参数", "/DevParams", <img src={icon3} width={25} />),
   //   getItem('输出配比', '/area', <IconFont style={{ fontSize: 18 }} type="icon-quyuguanli" />),
   //   getItem('泊位管理', '/berthage', <IconFont style={{ fontSize: 18 }} type="icon-boweibangding" />),
   //   getItem('车辆登记', '/register', <IconFont style={{ fontSize: 18 }} type="icon-qiche" />),
