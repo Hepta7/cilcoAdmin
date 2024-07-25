@@ -6,9 +6,8 @@ import { HashRouter } from "react-router-dom";
 import { useMount } from "ahooks";
 
 const App: React.FC = () => {
-
   useMount(() => {
-    window.location.replace("#/materialInfo");
+    window.location.replace("#/adminPanel");
   });
 
   return (

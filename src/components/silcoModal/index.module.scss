@@ -1,0 +1,13 @@
+.silcoModal {
+    min-width: 720px !important;
+
+    :global {
+        .ant-modal-title {
+            text-align: center;
+        }
+    }
+
+    .ant-modal-content {
+        min-height: 388px;
+    }
+}

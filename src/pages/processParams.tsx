@@ -1,12 +1,11 @@
 import { useRef } from "react";
-import MyForm from "./components/Form/index";
-import HeadTitle from "./components/headTitle";
+import MyForm from "../components/Form/index";
+import HeadTitle from "../components/headTitle";
 import { Button } from "antd";
-import styles from "./App.module.scss";
 import { useNavigate } from "react-router-dom";
-import { jsonToUrlParam } from "./utils";
+import styles from "../App.module.scss";
 
-let formList = [
+export let technologyData = [
   {
     key: "electrical",
     type: "input",
@@ -149,11 +148,11 @@ export default function ProcessParams() {
 
   const useForm = useRef() as any; // 存储头部form表单的实例
 
-  const onFinish = (values: any, type: string) => {
+  const onFinish = (values: any) => {
     console.log("first", values);
   };
 
-  const onFinishFailed = (values: any, type: string) => {};
+  const onFinishFailed = (values: any) => {};
 
   const generate = () => {
     let obj = useForm.current.getFieldsValue();
@@ -165,31 +164,29 @@ export default function ProcessParams() {
     if (valarr.length == Object.keys(obj).length) {
       navigate("/processView"); // 路由跳转
     }
-
   };
 
   const reset = () => {
     console.log("first", useForm.current.getFieldsValue());
-    // useForm.current.resetFields();
+    useForm.current.resetFields();
   };
 
   return (
     <div id={styles.processParams}>
-      <HeadTitle title="工艺参数" />
-
       <div className={styles.content}>
+        <h2>工艺参数</h2>
         <MyForm
           bottomIsShow={false}
-          onFinish={(e: any) => onFinish(e, "search")}
-          onFinishFailed={(e) => onFinishFailed(e, "search")}
-          formList={formList}
+          onFinish={(e: any) => onFinish(e)}
+          onFinishFailed={(e) => onFinishFailed(e)}
+          formList={technologyData}
           // arrangement="row"
           ref={useForm}
           onCancel={(e: any) => {
             e.resetFields();
           }}
         />
-        <div style={{ marginTop: 10 }}>
+        <div style={{ marginTop: 10 }} className={styles.footer}>
           <Button
             type="primary"
             size="large"
@@ -198,7 +195,7 @@ export default function ProcessParams() {
           >
             重置
           </Button>
-          <Button type="primary" size="large" onClick={generate}>
+          <Button size="large" onClick={generate}>
             下一步
           </Button>
         </div>

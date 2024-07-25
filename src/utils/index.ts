@@ -1,3 +1,5 @@
+import { EventEmitter } from "events";
+
 export const getLoalStorage = (key: any) => {
   if (!key) return;
   return window.localStorage.getItem(key);
@@ -91,7 +93,22 @@ export function urlParamsToObject(url: any) {
   return paramObj;
 }
 
-
 export const randomInt = (min: any, max: any) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
+
+/**
+ * 发送
+ *
+ * 通过Bus.emit('方法名',参数) 来触发这个事件并传递参数
+ *
+ * 接收
+ *
+ * 通过Bus.on('方法名',data=>{}) 来接收事件并得到传递的参数
+ *
+ * 在两个组件中都需要导入Bus
+ *
+ * 移除订阅
+ * Bus.removeAllListeners("事件名")  移除所有订阅
+ */
+export const Bus = new EventEmitter();

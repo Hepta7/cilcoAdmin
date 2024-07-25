@@ -28,8 +28,9 @@ export default function HeadTitle(HeadTitleProps: HeadTitleProps) {
   return (
 
     <div className={styles.headTitle}>
-      <span className={styles.title}>{title}</span>
-      <div className={styles.boottom}>
+      👋 Hi～ 欢迎来到无溶剂型有机硅功能涂层材料配方分析系统
+      {/* <span className={styles.title}>{title}</span> */}
+      {/* <div className={styles.boottom}>
         {
           boottoms?.map((item: any, index: number) => {
             return (
@@ -46,7 +47,7 @@ export default function HeadTitle(HeadTitleProps: HeadTitleProps) {
             )
           })
         }
-      </div>
+      </div> */}
     </div>
   );
 

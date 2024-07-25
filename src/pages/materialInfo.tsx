@@ -1,20 +1,13 @@
 import React, { useRef } from "react";
-import MyTable from "./components/table";
+import MyTable from "../components/table";
 import { useMount, useSetState } from "ahooks";
-import HeadTitle from "./components/headTitle";
-import styles from "./App.module.scss";
+import HeadTitle from "../components/headTitle";
+import styles from "../App.module.scss";
 import { Modal, message } from "antd";
-import MyForm from "./components/Form/index";
-import { random } from "./utils";
+import MyForm from "../components/Form/index";
+import { Bus, random } from "../utils";
 
 let formList = [
-  // {
-  //   key: "name",
-  //   type: "input",
-  //   isRequired: true,
-  //   title: "产品名称",
-  //   placeholder: "请输入",
-  // },
   {
     key: "density",
     type: "input",
@@ -47,14 +40,6 @@ let formList = [
     title: "熔体质量流动速率（g/10min）",
     placeholder: "请输入",
   },
-  // {
-  //   key: "bendstrength",
-  //   type: "input",
-  //   inputType: "number",
-  //   isRequired: true,
-  //   title: "弯曲强度（MPa）",
-  //   placeholder: "请输入",
-  // },
   {
     key: "strength",
     type: "input",
@@ -99,14 +84,10 @@ function generateMaterialData() {
       strength,
     });
   }
-  console.log("dataArray", dataArray);
   return dataArray;
 }
 
-// 调用函数并打印结果
-// const materials = ;
-// console.log(materials);
-
+let list = [] as any;
 export default function MaterialInfo() {
   const [tableData, setTableData] = useSetState({
     list: [] as any,
@@ -152,7 +133,7 @@ export default function MaterialInfo() {
       title: "玻璃化转变温度",
       dataIndex: "temperature",
       align: "center",
-      render: (text: string) => <div>{text} °C</div>,
+      render: (text: string) => <div>{text} 摄氏度</div>,
     },
     {
       title: "熔体质量流动速率",
@@ -182,7 +163,7 @@ export default function MaterialInfo() {
         >
           <div
             className={styles.operation}
-            style={{ color: "#005CF2FF" }}
+            style={{ color: "#008A16" }}
             onClick={() => resetItem(record)}
           >
             编辑
@@ -193,7 +174,19 @@ export default function MaterialInfo() {
   ];
 
   useMount(() => {
-    setTableData({ list: generateMaterialData() });
+    list = generateMaterialData();
+    setTableData({ list });
+  });
+
+  useMount(() => {
+    Bus.on("headSearch", (value) => {
+      // 使用filter方法来更新filteredItems
+      const filtered = list.filter((item: any) => {
+        return item.name.toLowerCase().includes(value.toLowerCase());
+      });
+
+      setTableData({ list: filtered });
+    });
   });
 
   // 编辑某一项
@@ -202,12 +195,10 @@ export default function MaterialInfo() {
       flag: true,
       clickItem: record,
     });
-    // useForm.current?.setFieldsValue(record);
   }
 
   const onFinish = (values: any, type: string) => {
     console.log("Success:", values);
-    // console.log("formData", formData.clickItem);
 
     let list = tableData.list.slice();
 
@@ -230,44 +221,50 @@ export default function MaterialInfo() {
     <div>
       <HeadTitle title="原材料信息" />
 
-      <MyTable
-        columns={columns}
-        dataSource={tableData.list}
-        page={tableData.pageNum}
-        pageSize={tableData.pageSize}
-        total={tableData.list.length}
-        rowKey={(record) => record.id}
-        scroll={{ x: "max-content" }}
-        // onPChange={(pageNum, pageSize) => {
-        //   let values = objDefault(headUseForm.current.getFieldsValue())
-        //   requerList({
-        //     ...values,
-        //     pageNum,
-        //     pageSize,
-        //   })
-        // }}
-      />
+      <div className={styles.tableContent}>
+        <div className={styles.tableTitle}>
+          <div className={styles.title}>产品信息 </div>
+        </div>
+
+        <MyTable
+          columns={columns}
+          dataSource={tableData.list}
+          page={tableData.pageNum}
+          pageSize={tableData.pageSize}
+          total={tableData.list.length}
+          rowKey={(record) => record.id}
+          scroll={{ x: "max-content" }}
+          // onPChange={(pageNum, pageSize) => {
+          //   let values = objDefault(headUseForm.current.getFieldsValue())
+          //   requerList({
+          //     ...values,
+          //     pageNum,
+          //     pageSize,
+          //   })
+          // }}
+        />
+      </div>
 
       <Modal
         centered
         footer={null}
-        title={"编辑信息 - "+formData.clickItem.name}
+        title={"编辑信息 - " + formData.clickItem.name}
         open={formData.flag}
         onCancel={() => {
-          useForm.current.resetFields();
           setFormData({ flag: false });
+          useForm.current.resetFields();
         }}
         wrapClassName={styles.formDataMoadl}
       >
         <MyForm
           fieldsValue={formData.clickItem}
-          cancelText="重置"
           confirmText="确认"
           onFinish={(e: any) => onFinish(e, "search")}
           onFinishFailed={(e) => onFinishFailed(e, "search")}
           formList={formList}
           // arrangement="row"
           ref={useForm}
+          // bottomIsShow={false}
           onCancel={(e: any) => {
             e.resetFields();
           }}

@@ -1,11 +1,11 @@
 import { useRef, useState } from "react";
-import MyForm from "./components/Form/index";
-import HeadTitle from "./components/headTitle";
+import MyForm from "../components/Form/index";
+import HeadTitle from "../components/headTitle";
 import { Button, message, Modal } from "antd";
-import styles from "./App.module.scss";
-import { randomInt } from "./utils";
-import Device from "./static/device.png";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import styles from "../App.module.scss";
+// import { randomInt } from "./utils";
+import Device from "../static/device.png";
+// import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 let formList = [
   {
@@ -119,7 +119,6 @@ export default function ProcessParams() {
 
   return (
     <div id={styles.devParams}>
-      <HeadTitle title="调整设备参数" />
 
       <div className={styles.content}>
         <img src={Device} style={{ marginBottom: 40 }} />
@@ -128,13 +127,13 @@ export default function ProcessParams() {
           onFinish={(e: any) => onFinish(e, "search")}
           onFinishFailed={(e) => onFinishFailed(e, "search")}
           formList={formList}
-          arrangement="row"
+          // arrangement="row"
           ref={useForm}
           onCancel={(e: any) => {
             e.resetFields();
           }}
         />
-        <div style={{ marginTop: 20 }}>
+        <div style={{ marginTop: 20 }} className={styles.footer}>
           <Button
             type="primary"
             size="large"

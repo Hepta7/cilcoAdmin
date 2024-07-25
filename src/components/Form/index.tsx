@@ -13,7 +13,6 @@ import {
 } from "antd";
 import { useEffect, useState, forwardRef, useImperativeHandle } from "react";
 import TextArea from "antd/lib/input/TextArea";
-import React from "react";
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -216,11 +215,11 @@ function MyForm(props: PropsType, ref: any) {
         ref={ref}
       >
         <div
-          className={
+          className={`${
             arrangement === "column"
               ? styles.formContColumn
               : styles.formContRow
-          }
+          } formContent`}
         >
           {formList.map((item: any, index: number) => {
             if (item?.isHide === undefined || item.isHide === false)
@@ -255,10 +254,10 @@ function MyForm(props: PropsType, ref: any) {
               {bottomIsShow && (
                 <div>
                   <Button onClick={() => onCancel?.(form)}>
-                    {cancelText || "取消"}{" "}
+                    {cancelText || "取消"}
                   </Button>
                   <Button type="primary" htmlType="submit">
-                    {confirmText || "提交"}{" "}
+                    {confirmText || "提交"}
                   </Button>
                 </div>
               )}
@@ -270,10 +269,10 @@ function MyForm(props: PropsType, ref: any) {
             {bottomIsShow && (
               <div>
                 <Button onClick={() => onCancel?.(form)}>
-                  {cancelText || "取消"}{" "}
+                  {cancelText || "取消"}
                 </Button>
                 <Button type="primary" htmlType="submit">
-                  {confirmText || "提交"}{" "}
+                  {confirmText || "提交"}
                 </Button>
               </div>
             )}

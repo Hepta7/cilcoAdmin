@@ -12,22 +12,14 @@ import {
   // useRoutes,
   useLocation, // 路由信息
 } from "react-router-dom";
-import { Breadcrumb, Dropdown, Layout, Menu, Space, Select } from "antd";
-// import {
-//   DownOutlined,
-//   LogoutOutlined,
-//   createFromIconfontCN,
-// } from "@ant-design/icons";
+import { Layout, Menu, Space, Select, Input } from "antd";
 import styles from "./App.module.scss";
-// import Logo from "../../static/icon/logo.png"
-// import { useMount, useSetState } from "ahooks";
-// import { outLogin, placeList } from "./api";
-// import { getLoalStorage, setLoalStorage } from "./utils/index";
+
 import logo1 from "./static/logo2.jpg";
-import icon1 from "./static/icon1.png";
-import icon2 from "./static/icon2.png";
-import icon3 from "./static/icon3.png";
-import icon from "./static/icon.png";
+import weatherIcon from "./static/weatherIcon.png";
+import { SearchOutlined } from "@ant-design/icons";
+import IconFont from "./components/iconfont";
+import { Bus } from "./utils";
 
 const { Option } = Select;
 
@@ -43,17 +35,33 @@ function getItem(label: any, key: any, icon?: any, children?: any) {
   };
 }
 
-// // 自定义icon
-// const IconFont = createFromIconfontCN({
-//   scriptUrl: ["//at.alicdn.com/t/c/font_3573489_gw6pz65pxyw.js"],
-// });
-
 // side 侧边栏 配置
 const items = [
-  getItem("原材料信息", "/materialInfo", <img src={icon1} width={25}/>),
-  getItem("产品性能", "/performance", <img src={icon} width={25} />),
-  getItem("工艺参数", "/processParams", <img src={icon2} width={25} />),
-  getItem("设备参数", "/DevParams", <img src={icon3} width={25} />),
+  getItem(
+    "操作台",
+    "/adminPanel",
+    <IconFont style={{ fontSize: 18 }} type="icon-caozuotai" />
+  ),
+  getItem(
+    "原材料信息",
+    "/materialInfo",
+    <IconFont style={{ fontSize: 18 }} type="icon-yuancailiao" />
+  ),
+  getItem(
+    "产品信息",
+    "/performance",
+    <IconFont style={{ fontSize: 18 }} type="icon-chanpin" />
+  ),
+  getItem(
+    "工艺参数",
+    "/processParams",
+    <IconFont style={{ fontSize: 18 }} type="icon-gongyi" />
+  ),
+  getItem(
+    "设备参数",
+    "/DevParams",
+    <IconFont style={{ fontSize: 18 }} type="icon-shebei" />
+  ),
   //   getItem('输出配比', '/area', <IconFont style={{ fontSize: 18 }} type="icon-quyuguanli" />),
   //   getItem('泊位管理', '/berthage', <IconFont style={{ fontSize: 18 }} type="icon-boweibangding" />),
   //   getItem('车辆登记', '/register', <IconFont style={{ fontSize: 18 }} type="icon-qiche" />),
@@ -119,7 +127,9 @@ function Home() {
   const [collapsed, setCollapsed] = useState(false); //side 收 展开
   const [pathname, setPathname] = useState<any>(["/place"]); // 面包屑
   const [openKeys, setOpenKeys] = useState<any>([]); // 当前展开
+  const [inputVal, setInputVal] = useState<any>([]); // 当前展开
   const [animationFlag, setAnimationFlag] = useState(false);
+
   //   const [placeSelect, setPlaceSelect] = useSetState<any>({  // 停车场下拉
   //     list: [],
   //     placeId: 1
@@ -159,6 +169,7 @@ function Home() {
 
   // 菜单点击事件
   function menuClick(e: any) {
+    setInputVal("");
     clearTimeout(timer);
 
     setAnimationFlag(true); // 开启 出场动画
@@ -172,7 +183,7 @@ function Home() {
       setAnimationFlag(false); // 开启 入场动画
     }, 300);
   }
-
+   
   return (
     <div id={styles.home}>
       <Layout style={{ minHeight: "100vh" }}>
@@ -181,8 +192,30 @@ function Home() {
           // style={{ padding: "0 20px ", }}
         >
           <div className={styles.title}>
-            <img src={logo1} alt="" />
-            <h1> 无溶剂型有机硅功能涂层材料配方分析系统</h1>
+            <img src={logo1} className={styles.logo} />
+            <div className={styles.weather}>
+
+              {["/adminPanel", "/materialInfo", "/performance"].includes(pathname[0]) ? (
+                <Input
+                  style={{ borderRadius: 20 }}
+                  size="large"
+                  placeholder="请输入搜索内容"
+                  prefix={<SearchOutlined />}
+                  onChange={(e: any) => {
+                    Bus.emit("headSearch", e?.target?.value);
+                    setInputVal(e?.target?.value);
+                  }}
+                />
+              ) : null}
+
+              <img
+                width={40}
+                height={28}
+                src={weatherIcon}
+                style={{ marginLeft: 24, marginRight: 18 }}
+              />
+              <div>东南风</div>
+            </div>
           </div>
         </Header>
 
@@ -205,33 +238,16 @@ function Home() {
             />
           </Sider>
 
-          <Content
-            style={{ padding: "0 24px 24px" }}
-            className={styles.content}
-          >
-            {/* 面包屑 */}
-            {
-              // !['/analyse', '/video'].includes(pathname[0]) &&
-              // <div className={styles.breadcrumb} style={{ margin: '16px 0' }}>
-              //   <span className={styles.breadcrumbHead}>当前位置：</span>
-              //   <Breadcrumb >
-              //     {
-              //       pathname?.map((item:any) => <Breadcrumb.Item key={item} className={styles.item}>{routerBreadcrumb[item]}</Breadcrumb.Item>)
-              //     }
-              //   </Breadcrumb>
-              // </div>
-            }
-
+          <Content className={styles.content}>
             {/* 页面展示 */}
 
-            <div style={{ minHeight: 360, marginTop: 20 }}>
-              <div
-                className={`${
-                  animationFlag ? styles.pageAppear : styles.pageDisAppear
-                }`}
-              >
-                <Outlet />
-              </div>
+            <div
+              style={{ height: "100%", padding: "24px" }}
+              className={`${
+                animationFlag ? styles.pageAppear : styles.pageDisAppear
+              }`}
+            >
+              <Outlet />
             </div>
           </Content>
         </Layout>
